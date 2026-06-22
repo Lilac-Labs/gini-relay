@@ -36,6 +36,10 @@ describe("resolveDefaults", () => {
     expect(r.bandwidth).toBe(DEFAULTS.bandwidth);
   });
 
+  it("lets GINI_BANDWIDTH override the bandwidth tier", () => {
+    expect(resolveDefaults({ GINI_BANDWIDTH: "5MB" }).bandwidth).toBe("5MB");
+  });
+
   it("applies every GINI_* override, converting frpsPort to a number", () => {
     const env = {
       GINI_RELAY_URL: "https://custom.example",

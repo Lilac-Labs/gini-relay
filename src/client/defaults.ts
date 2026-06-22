@@ -54,6 +54,10 @@ export function resolveDefaults(env: NodeJS.ProcessEnv = process.env): RelayDefa
     frpToken: env.GINI_FRP_TOKEN ?? DEFAULTS.frpToken,
     caFile: env.GINI_CA_FILE ?? DEFAULTS.caFile,
     loopbackPorts: DEFAULTS.loopbackPorts,
-    bandwidth: DEFAULTS.bandwidth,
+    // Overridable like the other fields so a client can request a different
+    // tier without a code change. The server still caps the declared value at
+    // CAP_BYTES (NewProxy rejects anything higher), so this can only request
+    // UP TO the tier — it can't exceed it.
+    bandwidth: env.GINI_BANDWIDTH ?? DEFAULTS.bandwidth,
   };
 }
