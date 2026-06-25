@@ -2,6 +2,7 @@
   "name": "gini-relay",
   "version": "0.3.0",
   "description": "Self-hosted ngrok-style relay. The client is a Bun package (Google login + native frpc tunnel, no docker); the server brain runs beside frps via docker compose.",
+  "license": "MIT",
   "type": "module",
   "private": true,
   "module": "src/client/index.ts",
