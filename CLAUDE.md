@@ -24,7 +24,7 @@ frp and Caddy stay stock; all custom logic lives in the brain, which frps calls 
 Bun (as of 1.3.x) has **no way to install a single sub-package out of a monorepo**: a `bun add git+ssh://…` installs the whole repo and reads its **root** `package.json`. So the repo stays a single package whose root `exports`/`main`/`types` point at `src/client/index.ts`. Importing `gini-relay` therefore yields **only the client API** — the server code is present in the repo (for `docker compose`) but never reachable through the package entry.
 
 ```
-bun add git+ssh://git@github.com/Lilac-Labs/gini-relay.git    (private repo → git+ssh)
+bun add git+ssh://git@github.com/Open-Curiosity/gini-relay.git    (private repo → git+ssh)
   └─ root package.json  exports "." → ./src/client/index.ts
         import { login, buildTunnel, runCli, Frpc } from "gini-relay"   // client only
 ```
@@ -97,7 +97,7 @@ frps-ca.key                           CA private key that issued the frps cert �
 Install (private repo → `git+ssh`; see *Why client + server live in one package*). `postinstall` downloads + checksum-verifies the native frpc binary, so there's nothing else to install.
 
 ```bash
-bun add "git+ssh://git@github.com/Lilac-Labs/gini-relay.git"
+bun add "git+ssh://git@github.com/Open-Curiosity/gini-relay.git"
 ```
 
 Everything baked into the client is **public by design** (the shared frp token, the pinned CA, the relay defaults). The real authorization is the per-user opaque session token minted after Google sign-in — so it is safe for anyone to install and run the client.
